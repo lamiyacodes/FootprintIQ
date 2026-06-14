@@ -230,16 +230,6 @@ document.getElementById('equivalents').innerHTML = equivalents.map(e => `
       <div class="bi-unit">kg CO₂/day</div>
     </div>
   `;
-
-  // Get Gemini insights
-  document.getElementById('ai-loading').classList.remove('hidden');
-  document.getElementById('ai-content').classList.add('hidden');
-
-  const insights = await getGeminiInsights(inputs, carbon);
-
-  document.getElementById('ai-loading').classList.add('hidden');
-  document.getElementById('ai-content').classList.remove('hidden');
-  document.getElementById('ai-content').innerHTML = formatResponse(insights);
 }
 
 // =====================
