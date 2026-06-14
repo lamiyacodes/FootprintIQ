@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -20,14 +20,10 @@ export default async function handler(req, res) {
 
     const data = await response.json();
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    
-    if (!text) {
-      return res.status(500).json({ error: 'No response from Gemini' });
-    }
-
+    if (!text) return res.status(500).json({ error: 'No response' });
     return res.status(200).json({ result: text });
 
   } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch from Gemini' });
+    return res.status(500).json({ error: error.message });
   }
 }
