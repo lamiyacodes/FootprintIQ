@@ -182,6 +182,36 @@ async function calculate() {
     document.getElementById('meter-fill').style.width = level.percent + '%';
   }, 100);
 
+  function getCarbonEquivalents(total) {
+  const daily = total;
+  return [
+    {
+      icon: '🚗',
+      text: `Driving <strong>${Math.round(daily / 0.21)} km</strong> by car`
+    },
+    {
+      icon: '🌳',
+      text: `You need <strong>${Math.round(daily / 0.06)} trees</strong> to offset this daily`
+    },
+    {
+      icon: '💡',
+      text: `Powering <strong>${Math.round(daily / 0.005)} LED bulbs</strong> for a day`
+    },
+    {
+      icon: '📱',
+      text: `Charging your phone <strong>${Math.round(daily / 0.008)} times</strong>`
+    }
+  ];
+}
+
+const equivalents = getCarbonEquivalents(carbon.total);
+document.getElementById('equivalents').innerHTML = equivalents.map(e => `
+  <div class="equiv-item">
+    <span class="equiv-icon">${e.icon}</span>
+    <span class="equiv-text">${e.text}</span>
+  </div>
+`).join('');
+
   // Breakdown cards
   document.getElementById('breakdown').innerHTML = `
     <div class="breakdown-item">
