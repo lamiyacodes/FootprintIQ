@@ -109,23 +109,16 @@ Give them a personalized action plan in this exact format:
 Keep it personal, specific to THEIR data, and under 200 words total. No generic advice.`;
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 400 }
-        })
-      }
-    );
+    const response = await fetch('/api/insights', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    });
 
     const data = await response.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    return text || "Unable to generate insights. Please check your API key.";
-  } catch (err) {
-    return "Could not connect to Gemini AI. Please check your API key and try again.";
+    return data.result || 'Unable to generate insights. Please try again.';
+  } catch (error) {
+    return 'Could not connect to the server. Please try again.';
   }
 }
 
