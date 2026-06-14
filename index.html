@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FootprintIQ — Know Your Carbon. Own Your Impact.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <nav>
+      <span class="logo">FootprintIQ</span>
+      <span class="tagline-nav">Powered by Gemini AI</span>
+    </nav>
+    <div class="hero-content">
+      <p class="eyebrow">Your planet. Your responsibility.</p>
+      <h1>How heavy is your<br/><span class="accent">carbon footprint?</span></h1>
+      <p class="hero-sub">Answer a few quick questions. Get your personal CO₂ score and an AI-powered action plan ~ built just for you.</p>
+      <a href="#calculator" class="cta-btn">Calculate My Footprint</a>
+    </div>
+    <div class="scroll-hint">scroll down</div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="calculator" id="calculator">
+    <div class="section-label">Step 01 — Transport</div>
+    <h2>How do you get around?</h2>
+
+    <div class="form-wrapper">
+
+      <!-- TRANSPORT -->
+      <div class="card" id="card-transport">
+        <div class="card-icon">🚗</div>
+        <h3>Transport</h3>
+        <div class="field">
+          <label>Primary mode of travel</label>
+          <div class="options" id="transport-mode">
+            <button class="opt" data-val="walking" onclick="select(this,'transport-mode')">Walking / Cycling</button>
+            <button class="opt" data-val="public" onclick="select(this,'transport-mode')">Public Transport</button>
+            <button class="opt" data-val="car" onclick="select(this,'transport-mode')">Personal Car</button>
+            <button class="opt" data-val="flight" onclick="select(this,'transport-mode')">Frequent Flights</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Km traveled per day: <span id="km-val">10</span> km</label>
+          <input type="range" min="0" max="200" value="10" id="km-range" oninput="document.getElementById('km-val').textContent=this.value"/>
+        </div>
+      </div>
+
+      <!-- FOOD -->
+      <div class="card" id="card-food">
+        <div class="card-icon">🍽️</div>
+        <h3>Food</h3>
+        <div class="field">
+          <label>Your diet type</label>
+          <div class="options" id="diet-type">
+            <button class="opt" data-val="vegan" onclick="select(this,'diet-type')">Vegan</button>
+            <button class="opt" data-val="vegetarian" onclick="select(this,'diet-type')">Vegetarian</button>
+            <button class="opt" data-val="omnivore" onclick="select(this,'diet-type')">Mixed / Omnivore</button>
+            <button class="opt" data-val="heavy-meat" onclick="select(this,'diet-type')">Heavy Meat Eater</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Meals cooked at home per week: <span id="meals-val">14</span></label>
+          <input type="range" min="0" max="21" value="14" id="meals-range" oninput="document.getElementById('meals-val').textContent=this.value"/>
+        </div>
+      </div>
+
+      <!-- ENERGY -->
+      <div class="card" id="card-energy">
+        <div class="card-icon">⚡</div>
+        <h3>Home Energy</h3>
+        <div class="field">
+          <label>Daily electricity usage (hours of heavy appliance use): <span id="elec-val">4</span> hrs</label>
+          <input type="range" min="0" max="24" value="4" id="elec-range" oninput="document.getElementById('elec-val').textContent=this.value"/>
+        </div>
+        <div class="field">
+          <label>Do you use AC regularly?</label>
+          <div class="options" id="ac-use">
+            <button class="opt" data-val="no" onclick="select(this,'ac-use')">No / Rarely</button>
+            <button class="opt" data-val="sometimes" onclick="select(this,'ac-use')">Sometimes</button>
+            <button class="opt" data-val="yes" onclick="select(this,'ac-use')">Yes, daily</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Energy source at home</label>
+          <div class="options" id="energy-source">
+            <button class="opt" data-val="solar" onclick="select(this,'energy-source')">Solar / Renewable</button>
+            <button class="opt" data-val="grid" onclick="select(this,'energy-source')">City Grid</button>
+            <button class="opt" data-val="generator" onclick="select(this,'energy-source')">Generator / Mixed</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="calculate-btn" onclick="calculate()">Calculate My Carbon Footprint</button>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results hidden" id="results">
+    <div class="section-label">Your Results</div>
+    <h2>Your Carbon Score</h2>
+
+    <div class="score-ring-wrapper">
+      <div class="score-ring" id="score-ring">
+        <div class="score-number" id="score-display">0</div>
+        <div class="score-unit">kg CO₂/day</div>
+      </div>
+      <div class="score-label" id="score-label">Calculating...</div>
+    </div>
+
+    <div class="meter-bar-wrapper">
+      <div class="meter-bar">
+        <div class="meter-fill" id="meter-fill"></div>
+      </div>
+      <div class="meter-labels">
+        <span>Low</span><span>Medium</span><span>High</span><span>Critical</span>
+      </div>
+    </div>
+
+    <div class="breakdown" id="breakdown"></div>
+
+    <!-- AI INSIGHTS -->
+    <div class="ai-insights" id="ai-insights">
+      <div class="ai-header">
+        <span class="ai-badge">Gemini AI</span>
+        <h3>Your Personalized Action Plan</h3>
+      </div>
+      <div class="ai-loading" id="ai-loading">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <p>Gemini is analyzing your footprint...</p>
+      </div>
+      <div class="ai-content hidden" id="ai-content"></div>
+    </div>
+
+    <div class="share-card" id="share-card">
+  <div class="share-card-inner">
+    <div class="share-logo">FootprintIQ</div>
+    <div class="share-score-big" id="share-score-big">0 kg CO₂/day</div>
+    <div class="share-level" id="share-level">Moderate Impact</div>
+    <div class="share-compare" id="share-compare"></div>
+    <div class="share-footer">Know Your Carbon. Own Your Impact.</div>
+  </div>
+</div>
+<button class="share-btn" onclick="shareCard()">Share My Score</button>
+<button class="recalc-btn" onclick="reset()">Recalculate</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>FootprintIQ ~ Built with Gemini AI for PromptWars 2026</p>
+    <p class="footer-sub">Every small action compounds. Start today.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
