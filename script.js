@@ -1,7 +1,7 @@
-// FootprintIQ — Built by Lamiya Zainab
-// Carbon Footprint Calculator with Gemini AI Insights
 // =====================
-const GEMINI_API_KEY = ""; 
+// CONFIGURATION
+// =====================
+const GEMINI_API_KEY = ""; // Replace with your Gemini API key
 const GEMINI_MODEL = "gemini-2.0-flash";
 
 // =====================
@@ -109,16 +109,23 @@ Give them a personalized action plan in this exact format:
 Keep it personal, specific to THEIR data, and under 200 words total. No generic advice.`;
 
   try {
-    const response = await fetch('/api/insights', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt })
-    });
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 400 }
+        })
+      }
+    );
 
     const data = await response.json();
-    return data.result || 'Unable to generate insights. Please try again.';
-  } catch (error) {
-    return 'Could not connect to the server. Please try again.';
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    return text || "Unable to generate insights. Please check your API key.";
+  } catch (err) {
+    return "Could not connect to Gemini AI. Please check your API key and try again.";
   }
 }
 
@@ -175,42 +182,11 @@ async function calculate() {
   // Score ring color
   ring.className = 'score-ring ' + (level.class !== 'low' ? level.class : '');
   document.getElementById('score-label').textContent = level.label;
-  updateShareCard(carbon, level);
 
   // Meter bar
   setTimeout(() => {
     document.getElementById('meter-fill').style.width = level.percent + '%';
   }, 100);
-
-  function getCarbonEquivalents(total) {
-  const daily = total;
-  return [
-    {
-      icon: '🚗',
-      text: `Driving <strong>${Math.round(daily / 0.21)} km</strong> by car`
-    },
-    {
-      icon: '🌳',
-      text: `You need <strong>${Math.round(daily / 0.06)} trees</strong> to offset this daily`
-    },
-    {
-      icon: '💡',
-      text: `Powering <strong>${Math.round(daily / 0.005)} LED bulbs</strong> for a day`
-    },
-    {
-      icon: '📱',
-      text: `Charging your phone <strong>${Math.round(daily / 0.008)} times</strong>`
-    }
-  ];
-}
-
-const equivalents = getCarbonEquivalents(carbon.total);
-document.getElementById('equivalents').innerHTML = equivalents.map(e => `
-  <div class="equiv-item">
-    <span class="equiv-icon">${e.icon}</span>
-    <span class="equiv-text">${e.text}</span>
-  </div>
-`).join('');
 
   // Breakdown cards
   document.getElementById('breakdown').innerHTML = `
@@ -230,40 +206,16 @@ document.getElementById('equivalents').innerHTML = equivalents.map(e => `
       <div class="bi-unit">kg CO₂/day</div>
     </div>
   `;
-}
 
-// =====================
-// SHARE CARD UPDATE
-// =====================
-function updateShareCard(carbon, level) {
-  const avg = 4.5;
-  const diff = Math.abs(carbon.total - avg);
-  const direction = carbon.total > avg ? 'higher' : 'lower';
-  const percent = Math.round((diff / avg) * 100);
+  // Get Gemini insights
+  document.getElementById('ai-loading').classList.remove('hidden');
+  document.getElementById('ai-content').classList.add('hidden');
 
-  document.getElementById('share-score-big').textContent = carbon.total + ' kg CO₂/day';
-  document.getElementById('share-level').textContent = level.label;
-  document.getElementById('share-compare').textContent =
-    `Your footprint is ${percent}% ${direction} than the average Indian (4.5 kg CO₂/day)`;
-}
+  const insights = await getGeminiInsights(inputs, carbon);
 
-// =====================
-// SHARE FUNCTION
-// =====================
-function shareCard() {
-  const card = document.getElementById('share-card');
-  const text = `My carbon footprint is ${document.getElementById('share-score-big').textContent} — calculated with FootprintIQ powered by Gemini AI. Know yours at footprintiq.vercel.app`;
-
-  if (navigator.share) {
-    navigator.share({
-      title: 'My Carbon Footprint — FootprintIQ',
-      text: text,
-    });
-  } else {
-    navigator.clipboard.writeText(text).then(() => {
-      alert('Score copied to clipboard! Paste it anywhere to share.');
-    });
-  }
+  document.getElementById('ai-loading').classList.add('hidden');
+  document.getElementById('ai-content').classList.remove('hidden');
+  document.getElementById('ai-content').innerHTML = formatResponse(insights);
 }
 
 // =====================
