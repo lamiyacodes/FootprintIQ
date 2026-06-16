@@ -49,39 +49,39 @@ function getActionPlan(carbon, inputs) {
 
   const plans = {
     transport: {
-      intro: 'Your biggest carbon culprit is <strong>how you travel</strong>. Small shifts in your daily commute can make a massive difference.',
+      intro: 'Your travel habits are doing the most damage here. The good news? <strong>Small shifts hit different</strong> when it comes to transport emissions.',
       days: [
-        'Walk or cycle for any trip under 2km instead of taking a vehicle',
-        'Try public transport for your main commute today',
-        'Carpool with someone going the same direction',
-        'Plan all your errands in one trip instead of multiple small ones',
-        'Work from home if possible — zero commute, zero emissions',
-        'Research the nearest metro or bus route to your most frequent destination',
-        'Calculate how much CO2 you saved this week and share it with someone'
+        'Any trip under 2km ~ just walk it. Your legs work fine',
+        'Take public transport today instead of your usual ride. One day, try it',
+        'Find one person going your way and carpool. Split the guilt AND the fuel cost',
+        'Batch your errands into one trip. Stop making five separate journeys',
+        'Work from home today if you can. Zero commute = zero emissions',
+        'Google the bus or metro route to your most frequent destination. Just know it exists',
+        'Look back at this week. Did you actually change anything? Even one thing counts'
       ]
     },
     food: {
-      intro: 'Your biggest carbon culprit is <strong>your diet</strong>. Food choices are one of the most powerful levers you have.',
+      intro: 'What you eat is quietly wrecking your carbon score. <strong>You do not have to go vegan</strong> — but a few real swaps actually matter.',
       days: [
-        'Replace one meat meal today with a plant-based alternative',
-        'Cook at home instead of ordering — home cooking uses 30% less energy',
-        'Buy local produce from a nearby market instead of packaged supermarket food',
-        'Try a fully vegetarian day — even one day a week matters',
-        'Reduce food waste by planning your meals before grocery shopping',
-        'Swap beef for chicken or fish — it cuts food emissions by nearly half',
-        'Share your plant-based meal experiment with someone and inspire them'
+        'Skip meat for just one meal today. One. That is it',
+        'Cook at home instead of ordering. Home food hits different AND uses less energy',
+        'Buy something from a local market this week instead of a supermarket chain',
+        'Go fully vegetarian for one day. Just one. See how it feels',
+        'Plan your meals before shopping. Food waste is a silent carbon killer',
+        'If eating meat, choose chicken or fish over beef. Simple swap, big difference',
+        'Tell one person what you tried this week. Accountability hits different when someone knows'
       ]
     },
     energy: {
-      intro: 'Your biggest carbon culprit is <strong>your home energy use</strong>. Simple habit changes at home add up faster than you think.',
+      intro: 'Your home is quietly running up your carbon bill. <strong>You do not need solar panels</strong> — just some genuinely simple habit shifts.',
       days: [
-        'Turn off all lights and fans when leaving a room — every single time',
-        'Set your AC 2 degrees higher than usual and use a fan instead',
-        'Unplug chargers and devices you are not actively using',
-        'Do laundry with cold water — it uses 90% less energy than hot',
-        'Cook multiple meals at once to minimize oven and stove use',
-        'Switch off your geyser 10 minutes early — the water stays hot enough',
-        'Do an energy audit — walk around your home and note every device left on standby'
+        'Leave a room? Turn off the light. Every. Single. Time.',
+        'Set your AC 2 degrees higher and use a fan. You will survive, promise',
+        'Unplug chargers that are not charging anything. They still draw power just sitting there',
+        'Wash your clothes in cold water today. Uses 90% less energy than hot',
+        'Cook multiple things at once instead of heating the stove three separate times',
+        'Turn your geyser off 10 minutes early. The water stays hot enough, trust',
+        'Walk around your home and count how many things are on standby. Then turn them off'
       ]
     }
   };
