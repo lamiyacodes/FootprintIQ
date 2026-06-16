@@ -1,5 +1,5 @@
 // FootprintIQ — Built by Lamiya Zainab
-// Carbon Footprint Calculator
+// Carbon Footprint Calculator with real-time comparison data
 const GEMINI_API_KEY = "";
 
 function select(btn, groupId) {
