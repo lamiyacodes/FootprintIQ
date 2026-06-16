@@ -40,6 +40,66 @@ function getLevel(total) {
   return { label: "Critical Impact", class: "high", percent: 95 };
 }
 
+function getActionPlan(carbon, inputs) {
+  const highest = Object.entries({
+    transport: carbon.transport,
+    food: carbon.food,
+    energy: carbon.energy
+  }).sort((a, b) => b[1] - a[1])[0][0];
+
+  const plans = {
+    transport: {
+      intro: 'Your biggest carbon culprit is <strong>how you travel</strong>. Small shifts in your daily commute can make a massive difference.',
+      days: [
+        'Walk or cycle for any trip under 2km instead of taking a vehicle',
+        'Try public transport for your main commute today',
+        'Carpool with someone going the same direction',
+        'Plan all your errands in one trip instead of multiple small ones',
+        'Work from home if possible — zero commute, zero emissions',
+        'Research the nearest metro or bus route to your most frequent destination',
+        'Calculate how much CO2 you saved this week and share it with someone'
+      ]
+    },
+    food: {
+      intro: 'Your biggest carbon culprit is <strong>your diet</strong>. Food choices are one of the most powerful levers you have.',
+      days: [
+        'Replace one meat meal today with a plant-based alternative',
+        'Cook at home instead of ordering — home cooking uses 30% less energy',
+        'Buy local produce from a nearby market instead of packaged supermarket food',
+        'Try a fully vegetarian day — even one day a week matters',
+        'Reduce food waste by planning your meals before grocery shopping',
+        'Swap beef for chicken or fish — it cuts food emissions by nearly half',
+        'Share your plant-based meal experiment with someone and inspire them'
+      ]
+    },
+    energy: {
+      intro: 'Your biggest carbon culprit is <strong>your home energy use</strong>. Simple habit changes at home add up faster than you think.',
+      days: [
+        'Turn off all lights and fans when leaving a room — every single time',
+        'Set your AC 2 degrees higher than usual and use a fan instead',
+        'Unplug chargers and devices you are not actively using',
+        'Do laundry with cold water — it uses 90% less energy than hot',
+        'Cook multiple meals at once to minimize oven and stove use',
+        'Switch off your geyser 10 minutes early — the water stays hot enough',
+        'Do an energy audit — walk around your home and note every device left on standby'
+      ]
+    }
+  };
+
+  const plan = plans[highest];
+
+  document.getElementById('action-content').innerHTML =
+    '<p class="action-intro">' + plan.intro + '</p>' +
+    '<div class="action-days">' +
+    plan.days.map((task, i) =>
+      '<div class="action-day">' +
+        '<span class="day-number">Day ' + (i + 1) + '</span>' +
+        '<span class="day-task">' + task + '</span>' +
+      '</div>'
+    ).join('') +
+    '</div>';
+}
+
 function getCarbonEquivalents(total) {
   return [
     { icon: '🚗', text: 'Driving <strong>' + Math.round(total / 0.21) + ' km</strong> by car' },
@@ -134,6 +194,7 @@ async function calculate() {
     '<div class="breakdown-item"><div class="bi-label">Energy</div><div class="bi-value">' + carbon.energy + '</div><div class="bi-unit">kg CO2/day</div></div>';
 
   renderChart(carbon.total);
+  getActionPlan(carbon, inputs);
 
   document.getElementById('equivalents').innerHTML = getCarbonEquivalents(carbon.total).map(e =>
     '<div class="equiv-item"><span class="equiv-icon">' + e.icon + '</span><span class="equiv-text">' + e.text + '</span></div>'
