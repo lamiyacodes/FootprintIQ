@@ -697,9 +697,11 @@ footer {
 
 .chart-value {
   font-family: var(--font-display);
-  font-size: 0.8rem;
+  font-size: clamp(0.55rem, 2.5vw, 0.8rem);
   font-weight: 700;
   color: var(--text);
+  text-align: center;
+  width: 100%;
 }
 
 .chart-legend {
