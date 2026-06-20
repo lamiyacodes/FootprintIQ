@@ -647,7 +647,7 @@ footer {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1.5rem;
-  padding-top: 3rem;
+  padding-top: 1rem;
   margin: 2rem 0;
   overflow: visible;
 }
