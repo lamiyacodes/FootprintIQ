@@ -113,14 +113,14 @@ function renderChart(userTotal) {
   const maxVal = Math.max(userTotal, 12, 2.5);
   const bars = [
     { label: 'You', value: userTotal, class: 'you' },
-    { label: 'India Avg', value: 4.5, class: 'india' },
-    { label: 'Global Avg', value: 12, class: 'global' },
-    { label: 'Paris Target', value: 2.5, class: 'paris' }
+    { label: 'India', value: 4.5, class: 'india' },
+    { label: 'Global', value: 12, class: 'global' },
+    { label: 'Paris', value: 2.5, class: 'paris' }
   ];
   document.getElementById('comparison-chart').innerHTML = bars.map(bar =>
     '<div class="chart-bar-group">' +
       '<div class="chart-value">' + bar.value + '</div>' +
-      '<div class="chart-bar ' + bar.class + '" style="height:' + Math.round((bar.value / maxVal) * 150) + 'px"></div>' +
+      '<div class="chart-bar ' + bar.class + '" style="height:' + Math.round((bar.value / maxVal) * 120) + 'px"></div>' +
       '<div class="chart-label">' + bar.label + '</div>' +
     '</div>'
   ).join('');
