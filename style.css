@@ -621,7 +621,7 @@ footer {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 1rem;
+  padding: 0.75rem;
 }
 
 .equiv-icon {
@@ -664,9 +664,10 @@ footer {
   align-items: flex-end;
   gap: 0.5rem;
   height: 180px;
+  padding-top: 1.5rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .chart-bar-group {
