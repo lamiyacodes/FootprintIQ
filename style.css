@@ -647,7 +647,7 @@ footer {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1.5rem;
-  padding-top: 1rem;
+  padding-top: 2.5rem;
   margin: 2rem 0;
   overflow: visible;
 }
@@ -665,8 +665,8 @@ footer {
   display: flex;
   align-items: flex-end;
   gap: 0.5rem;
-  height: 120px;
-  margin-top: 2rem;
+  height: 160px;
+  margin-top: 2.5rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--border);
   overflow: visible;
