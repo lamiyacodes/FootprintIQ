@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="FootprintIQ — Calculate your personal carbon footprint and get a personalized action plan to reduce your environmental impact."/>
   <title>FootprintIQ — Know Your Carbon. Own Your Impact.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -11,156 +12,161 @@
 <body>
 
   <!-- HERO -->
-  <section class="hero">
-    <nav>
-      <span class="logo">FootprintIQ</span>
-      <span class="tagline-nav">Carbon Awareness Platform</span>
+  <header>
+  <section class="hero" aria-label="Hero section">
+    <nav aria-label="Main navigation">
+      <span class="logo" aria-label="FootprintIQ">FootprintIQ</span>
+      <span class="tagline-nav" aria-hidden="true">Carbon Awareness Platform</span>
     </nav>
     <div class="hero-content">
       <p class="eyebrow">Your planet. Your responsibility.</p>
       <h1>How heavy is your<br/><span class="accent">carbon footprint?</span></h1>
-      <p class="hero-sub">Answer a few quick questions. Get your personal CO₂ score and an AI-powered action plan ~ built just for you.</p>
-      <a href="#calculator" class="cta-btn">Calculate My Footprint</a>
+      <p class="hero-sub">Answer a few quick questions. Get your personal CO₂ score and a personalized action plan — built just for you.</p>
+      <a href="#calculator" class="cta-btn" aria-label="Go to carbon footprint calculator">Calculate My Footprint</a>
     </div>
-    <div class="scroll-hint">scroll down</div>
+    <div class="scroll-hint" aria-hidden="true">scroll down</div>
   </section>
+  </header>
 
   <!-- CALCULATOR -->
-  <section class="calculator" id="calculator">
+  <main>
+  <section class="calculator" id="calculator" aria-label="Carbon footprint calculator">
     <h2>How do you get around?</h2>
 
-    <div class="form-wrapper">
+    <div class="form-wrapper" role="form" aria-label="Carbon footprint input form">
 
       <!-- TRANSPORT -->
-      <div class="card" id="card-transport">
-        <div class="card-icon">🚗</div>
+      <div class="card" id="card-transport" aria-label="Transport section">
+        <div class="card-icon" aria-hidden="true">🚗</div>
         <h3>Transport</h3>
         <div class="field">
-          <label>Primary mode of travel</label>
-          <div class="options" id="transport-mode">
-            <button class="opt" data-val="walking" onclick="select(this,'transport-mode')">Walking / Cycling</button>
-            <button class="opt" data-val="public" onclick="select(this,'transport-mode')">Public Transport</button>
-            <button class="opt" data-val="car" onclick="select(this,'transport-mode')">Personal Car</button>
-            <button class="opt" data-val="flight" onclick="select(this,'transport-mode')">Frequent Flights</button>
+          <label id="transport-label">Primary mode of travel</label>
+          <div class="options" id="transport-mode" role="group" aria-labelledby="transport-label">
+            <button class="opt" data-val="walking" onclick="select(this,'transport-mode')" aria-pressed="false">Walking / Cycling</button>
+            <button class="opt" data-val="public" onclick="select(this,'transport-mode')" aria-pressed="false">Public Transport</button>
+            <button class="opt" data-val="car" onclick="select(this,'transport-mode')" aria-pressed="false">Personal Car</button>
+            <button class="opt" data-val="flight" onclick="select(this,'transport-mode')" aria-pressed="false">Frequent Flights</button>
           </div>
         </div>
         <div class="field">
-          <label>Km traveled per day: <span id="km-val">10</span> km</label>
-          <input type="range" min="0" max="200" value="10" id="km-range" oninput="document.getElementById('km-val').textContent=this.value"/>
+          <label for="km-range">Km traveled per day: <span id="km-val">10</span> km</label>
+          <input type="range" min="0" max="200" value="10" id="km-range" aria-label="Kilometers traveled per day" oninput="document.getElementById('km-val').textContent=this.value"/>
         </div>
       </div>
 
       <!-- FOOD -->
-      <div class="card" id="card-food">
-        <div class="card-icon">🍽️</div>
+      <div class="card" id="card-food" aria-label="Food section">
+        <div class="card-icon" aria-hidden="true">🍽️</div>
         <h3>Food</h3>
         <div class="field">
-          <label>Your diet type</label>
-          <div class="options" id="diet-type">
-            <button class="opt" data-val="vegan" onclick="select(this,'diet-type')">Vegan</button>
-            <button class="opt" data-val="vegetarian" onclick="select(this,'diet-type')">Vegetarian</button>
-            <button class="opt" data-val="omnivore" onclick="select(this,'diet-type')">Mixed / Omnivore</button>
-            <button class="opt" data-val="heavy-meat" onclick="select(this,'diet-type')">Heavy Meat Eater</button>
+          <label id="diet-label">Your diet type</label>
+          <div class="options" id="diet-type" role="group" aria-labelledby="diet-label">
+            <button class="opt" data-val="vegan" onclick="select(this,'diet-type')" aria-pressed="false">Vegan</button>
+            <button class="opt" data-val="vegetarian" onclick="select(this,'diet-type')" aria-pressed="false">Vegetarian</button>
+            <button class="opt" data-val="omnivore" onclick="select(this,'diet-type')" aria-pressed="false">Mixed / Omnivore</button>
+            <button class="opt" data-val="heavy-meat" onclick="select(this,'diet-type')" aria-pressed="false">Heavy Meat Eater</button>
           </div>
         </div>
         <div class="field">
-          <label>Meals cooked at home per week: <span id="meals-val">14</span></label>
-          <input type="range" min="0" max="21" value="14" id="meals-range" oninput="document.getElementById('meals-val').textContent=this.value"/>
+          <label for="meals-range">Meals cooked at home per week: <span id="meals-val">14</span></label>
+          <input type="range" min="0" max="21" value="14" id="meals-range" aria-label="Meals cooked at home per week" oninput="document.getElementById('meals-val').textContent=this.value"/>
         </div>
       </div>
 
       <!-- ENERGY -->
-      <div class="card" id="card-energy">
-        <div class="card-icon">⚡</div>
+      <div class="card" id="card-energy" aria-label="Home energy section">
+        <div class="card-icon" aria-hidden="true">⚡</div>
         <h3>Home Energy</h3>
         <div class="field">
-          <label>Daily electricity usage (hours of heavy appliance use): <span id="elec-val">4</span> hrs</label>
-          <input type="range" min="0" max="24" value="4" id="elec-range" oninput="document.getElementById('elec-val').textContent=this.value"/>
+          <label for="elec-range">Daily electricity usage (hours of heavy appliance use): <span id="elec-val">4</span> hrs</label>
+          <input type="range" min="0" max="24" value="4" id="elec-range" aria-label="Daily electricity usage in hours" oninput="document.getElementById('elec-val').textContent=this.value"/>
         </div>
         <div class="field">
-          <label>Do you use AC regularly?</label>
-          <div class="options" id="ac-use">
-            <button class="opt" data-val="no" onclick="select(this,'ac-use')">No / Rarely</button>
-            <button class="opt" data-val="sometimes" onclick="select(this,'ac-use')">Sometimes</button>
-            <button class="opt" data-val="yes" onclick="select(this,'ac-use')">Yes, daily</button>
+          <label id="ac-label">Do you use AC regularly?</label>
+          <div class="options" id="ac-use" role="group" aria-labelledby="ac-label">
+            <button class="opt" data-val="no" onclick="select(this,'ac-use')" aria-pressed="false">No / Rarely</button>
+            <button class="opt" data-val="sometimes" onclick="select(this,'ac-use')" aria-pressed="false">Sometimes</button>
+            <button class="opt" data-val="yes" onclick="select(this,'ac-use')" aria-pressed="false">Yes, daily</button>
           </div>
         </div>
         <div class="field">
-          <label>Energy source at home</label>
-          <div class="options" id="energy-source">
-            <button class="opt" data-val="solar" onclick="select(this,'energy-source')">Solar / Renewable</button>
-            <button class="opt" data-val="grid" onclick="select(this,'energy-source')">City Grid</button>
-            <button class="opt" data-val="generator" onclick="select(this,'energy-source')">Generator / Mixed</button>
+          <label id="energy-label">Energy source at home</label>
+          <div class="options" id="energy-source" role="group" aria-labelledby="energy-label">
+            <button class="opt" data-val="solar" onclick="select(this,'energy-source')" aria-pressed="false">Solar / Renewable</button>
+            <button class="opt" data-val="grid" onclick="select(this,'energy-source')" aria-pressed="false">City Grid</button>
+            <button class="opt" data-val="generator" onclick="select(this,'energy-source')" aria-pressed="false">Generator / Mixed</button>
           </div>
         </div>
       </div>
 
-      <button class="calculate-btn" onclick="calculate()">Calculate My Carbon Footprint</button>
+      <button class="calculate-btn" onclick="calculate()" aria-label="Calculate my carbon footprint score">Calculate My Carbon Footprint</button>
     </div>
   </section>
 
   <!-- RESULTS -->
-  <section class="results hidden" id="results">
+  <section class="results hidden" id="results" aria-label="Your carbon footprint results" aria-live="polite">
     <div class="section-label">Your Results</div>
     <h2>Your Carbon Score</h2>
 
     <div class="score-ring-wrapper">
-      <div class="score-ring" id="score-ring">
-        <div class="score-number" id="score-display">0</div>
+      <div class="score-ring" id="score-ring" role="img" aria-label="Carbon score ring">
+        <div class="score-number" id="score-display" aria-live="polite">0</div>
         <div class="score-unit">kg CO₂/day</div>
       </div>
-      <div class="score-label" id="score-label">Calculating...</div>
+      <div class="score-label" id="score-label" aria-live="polite">Calculating...</div>
     </div>
 
-    <div class="meter-bar-wrapper">
-      <div class="meter-bar">
+    <div class="meter-bar-wrapper" aria-label="Impact level meter">
+      <div class="meter-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
         <div class="meter-fill" id="meter-fill"></div>
       </div>
-      <div class="meter-labels">
+      <div class="meter-labels" aria-hidden="true">
         <span>Low</span><span>Medium</span><span>High</span><span>Critical</span>
       </div>
     </div>
 
-    <div class="breakdown" id="breakdown"></div>
+    <div class="breakdown" id="breakdown" aria-label="Emission breakdown by category"></div>
     
-  <div class="chart-section">
-  <div class="chart-wrapper" id="comparison-chart"></div>
-  <div class="chart-title">How you compare to the world</div>
-  <div class="chart-legend">
-      <span class="legend-item"><span class="legend-dot you"></span>You</span>
-      <span class="legend-item"><span class="legend-dot india"></span>India Avg</span>
-      <span class="legend-item"><span class="legend-dot global"></span>Global Avg</span>
-      <span class="legend-item"><span class="legend-dot paris"></span>Paris Target</span>
-  </div>
-</div>
-    <div class="equiv-section">
-  <div class="equiv-title">That's equivalent to...</div>
-  <div class="equiv-grid" id="equivalents"></div>
-</div>
+    <div class="chart-section" aria-label="Carbon comparison chart">
+      <div class="chart-wrapper" id="comparison-chart" role="img" aria-label="Bar chart comparing your carbon footprint to India average, global average and Paris Agreement target"></div>
+      <div class="chart-title">How you compare to the world</div>
+      <div class="chart-legend" aria-label="Chart legend">
+        <span class="legend-item"><span class="legend-dot you" aria-hidden="true"></span>You</span>
+        <span class="legend-item"><span class="legend-dot india" aria-hidden="true"></span>India Avg</span>
+        <span class="legend-item"><span class="legend-dot global" aria-hidden="true"></span>Global Avg</span>
+        <span class="legend-item"><span class="legend-dot paris" aria-hidden="true"></span>Paris Target</span>
+      </div>
+    </div>
 
- <div class="action-plan" id="action-plan">
-  <div class="action-header">
-    <div class="action-badge">Your Plan</div>
-    <h3 class="action-title">Your 7-Day Challenge</h3>
-  </div>
-  <div class="action-content" id="action-content"></div>
-</div>
+    <div class="equiv-section" aria-label="Carbon equivalents">
+      <div class="equiv-title">That's equivalent to...</div>
+      <div class="equiv-grid" id="equivalents"></div>
+    </div>
+
+    <div class="action-plan" id="action-plan" aria-label="Personalized 7-day action plan">
+      <div class="action-header">
+        <div class="action-badge">Your Plan</div>
+        <h3 class="action-title">Your 7-Day Challenge</h3>
+      </div>
+      <div class="action-content" id="action-content"></div>
+    </div>
  
-<div class="share-card" id="share-card">
-  <div class="share-card-inner">
-    <div class="share-logo">FootprintIQ</div>
-    <div class="share-score-big" id="share-score-big">0 kg CO₂/day</div>
-    <div class="share-level" id="share-level">Moderate Impact</div>
-    <div class="share-compare" id="share-compare"></div>
-    <div class="share-footer">Know Your Carbon. Own Your Impact.</div>
-  </div>
-</div>
-<button class="share-btn" onclick="shareCard()">Share My Score</button>
-<button class="recalc-btn" onclick="reset()">Recalculate</button>
+    <div class="share-card" id="share-card" aria-label="Shareable carbon score card">
+      <div class="share-card-inner">
+        <div class="share-logo">FootprintIQ</div>
+        <div class="share-score-big" id="share-score-big">0 kg CO₂/day</div>
+        <div class="share-level" id="share-level">Moderate Impact</div>
+        <div class="share-compare" id="share-compare"></div>
+        <div class="share-footer">Know Your Carbon. Own Your Impact.</div>
+      </div>
+    </div>
+    <button class="share-btn" onclick="shareCard()" aria-label="Share your carbon footprint score">Share My Score</button>
+    <button class="recalc-btn" onclick="reset()" aria-label="Recalculate your carbon footprint">Recalculate</button>
   </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer>
+  <footer aria-label="Site footer">
     <p>FootprintIQ ~ Built for PromptWars 2026</p>
     <p class="footer-sub">Every small action compounds. Start today.</p>
   </footer>
